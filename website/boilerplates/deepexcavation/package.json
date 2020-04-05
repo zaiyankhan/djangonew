@@ -16,6 +16,6 @@
     "grunt-text-replace": "0.4.0",
     "grunt-postcss": "^0.8.0",
     "cssnano": "^3.7.5",
-    "clean-css": "3.4.23"
+    "clean-css": "4.2.3"
   }
 }
