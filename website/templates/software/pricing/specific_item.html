@@ -1,0 +1,131 @@
+{% load thumbnail %}
+{% if pricing.active %}{% if instance.template == 'vertical' %}
+{% with pricing.software as software %}
+    <div class="sub-pricing">
+<div class="pricing-box secondary-after{% if pricing.is_best_seller %} best-seller{% endif %}">
+    <div class="pricing-icon text-info">{% if software.logo %}
+        {% thumbnail software.logo '100x100' crop upscale subject_location=backgroundheader.image.subject_location as thumb %}
+        <img src="{{ thumb.url }}" class="img-responsive center-block" alt="{{ software.name }}">
+    {% endif %}</div>
+    <div class="pricing-title">{{ software.name }} {{ pricing.name }}</div>
+    <div class="pricing-details">
+           {{ pricing.short_description|safe|default_if_none:"&nbsp;" }}
+        {% if software.read_more_link %}<a href="{{ software.read_more_link }}">Learn more</a>{% endif %}
+    </div>
+    {% if instance.include_modules %}
+        {% with pricing.active_software_modules as software_modules %}
+            {% if software_modules %}
+                <strong>Additional modules - Customize your version</strong>
+                <ul class="list-unstyled">
+                    {% for software_module in software_modules %}
+                        <li><input autocomplete="off" class="software_module" data-price="{{ software_module.price|floatformat }}" type="checkbox"
+                                   value="{{ software_module.pk }}"> {{ software_module.name }}
+                            {% if software_module.read_more_link %}
+                                <a href="{{ software_module.read_more_link }}">Learn more</a>{% endif %}
+                            ${{ software_module.price|floatformat }}</li>
+                    {% endfor %}
+                </ul>
+                <hr/>
+            {% endif %}
+        {% endwith %}
+    {% endif %}
+    <div class="pricing-amount">
+        <div>Only</div>
+        <div class="price">
+            <span class="currency">$</span>
+            <span class="amount" data-price="{{ pricing.price|floatformat }}" data-total-price="{{ pricing.price|floatformat }}">{{ pricing.price|floatformat }}</span>
+            <span class="duration">{% if pricing.per %} / {{ pricing.per }}{% endif %}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+            <div class="form-group">
+                <label for="num-licenses">Number of licenses</label>
+                <input type="number" value="1" name="num-licenses" class="form-control" placeholder="Number of licenses"
+                       min="1" max="20" step="1">
+            </div>
+        </div>
+    </div>
+    <div class="pricing-button">
+        {% if instance.show_buy_now_button %}
+            <a style="{% if instance.buy_now_button_color %}background-color: {{ instance.buy_now_button_color }};border-color:{{ instance.buy_now_button_color }};{% endif %}{% if instance.buy_now_text_color %}color:{{ instance.buy_now_text_color }}{% endif %}" href="#" data-add-to-cart-url="{{ pricing.add_to_cart_url }}" class="buy-now primary-button">Buy now</a>
+        {% endif %}
+        {% if instance.show_add_to_cart_button %}
+        <a style="{% if instance.add_to_cart_button_color %}background-color: {{ instance.add_to_cart_button_color }};border-color:{{ instance.add_to_cart_button_color }};{% endif %}{% if instance.add_to_cart_text_color %}color:{{ instance.add_to_cart_text_color }}{% endif %}" href="#" data-add-to-cart-url="{{ pricing.add_to_cart_url }}" class="add-to-cart primary-button"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+        {% endif %}
+    </div>
+</div>
+    </div>
+    {% endwith %}
+{% else %}
+    {% with pricing.software as software %}
+        <div class="sub-pricing">
+            <div class="pricing-box secondary-after{% if pricing.is_best_seller %} best-seller2{% endif %}">
+            <div class="pricing-content"><div class="bestseller-title"></div>
+                {% if instance.include_modules %}
+                <div class="row">
+                <div class="col-sm-4">
+                {% endif %}
+                <div class="pricing-icon text-info">{% if software.logo %}
+                    {% thumbnail software.logo '100x100' crop upscale subject_location=backgroundheader.image.subject_location as thumb %}
+                    <img src="{{ thumb.url }}" class="img-responsive center-block" alt="{{ software.name }}">
+                {% endif %}</div>
+                <div class="pricing-title">{{ software.name }} {{ pricing.name }}</div>
+                <div class="pricing-details">
+                    {{ pricing.short_description|safe|default_if_none:"&nbsp;" }}
+                    {% if software.read_more_link %}<a href="{{ software.read_more_link }}">Learn more</a>{% endif %}
+                </div>
+                <div class="pricing-amount">
+                    <div>Only</div>
+                    <div class="price">
+                        <span class="currency">$</span>
+                        <span class="amount" data-price="{{ pricing.price|floatformat }}"
+                              data-total-price="{{ pricing.price|floatformat }}">{{ pricing.price|floatformat }}</span>
+                        <span class="duration">{% if pricing.per %} / {{ pricing.per }}{% endif %}</span>
+                    </div>
+                </div>
+                {% if instance.include_modules %}
+                    </div>
+                    <div class="col-sm-8 text-left">
+                    {% with pricing.active_software_modules as software_modules %}
+                        {% if software_modules %}
+                            <strong>Additional modules - Customize your version</strong>
+                            <ul class="list-unstyled">
+                                {% for software_module in software_modules %}
+                                    <li><input class="software_module"
+                                               data-price="{{ software_module.price|floatformat }}" type="checkbox"
+                                               value="{{ software_module.pk }}"> {{ software_module.name }}
+                                        {% if software_module.read_more_link %}
+                                            <a href="{{ software_module.read_more_link }}">Learn more</a>{% endif %}
+                                        ${{ software_module.price|floatformat }}</li>
+                                {% endfor %}
+                            </ul>
+                            <hr/>
+                        {% endif %}
+                    {% endwith %}
+                    </div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                <label for="num-licenses">Number of licenses</label>
+                <input type="number" value="1" name="num-licenses" class="form-control" placeholder="Number of licenses" min="1" max="20" step="1">
+                    </div>
+                    </div>
+                <div class="col-sm-8">
+                <div class="pricing-button" style="margin-top:35px;">
+                    {% if instance.show_buy_now_button %}<a style="{% if instance.buy_now_button_color %}background-color: {{ instance.buy_now_button_color }};border-color:{{ instance.buy_now_button_color }};{% endif %}{% if instance.buy_now_text_color %}color:{{ instance.buy_now_text_color }}{% endif %}" href="#" data-add-to-cart-url="{{ pricing.add_to_cart_url }}" class="buy-now primary-button">Buy
+                        now</a>
+                {% endif %}
+                    {% if instance.show_add_to_cart_button %}<a style="{% if instance.add_to_cart_button_color %}background-color: {{ instance.add_to_cart_button_color }};border-color:{{ instance.add_to_cart_button_color }};{% endif %}{% if instance.add_to_cart_text_color %}color:{{ instance.add_to_cart_text_color }}{% endif %}"  href="#" data-add-to-cart-url="{{ pricing.add_to_cart_url }}" class="add-to-cart primary-button"><i
+                            class="fa fa-shopping-cart"></i> Add to cart</a>{% endif %}
+                </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    {% endwith %}
+{% endif %}
+{% endif %}

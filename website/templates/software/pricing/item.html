@@ -1,0 +1,9 @@
+{% if software.active %}
+    <div class="row">
+    {% for pricing in software.active_pricing %}
+        <div class="col-sm-6 col-md-4">
+        {% include "software/pricing/specific_item.html" %}
+        </div>
+    {% endfor %}
+    </div>
+{% endif %}

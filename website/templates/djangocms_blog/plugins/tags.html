@@ -1,0 +1,7 @@
+{% load i18n %}
+    <div class="widget">
+        <h5 class="widget-title">Popular Tags</h5>
+        <div class="widget-tags">
+        {% for tag in tags %}<a class="label label-primary" href="{% url 'djangocms_blog:posts-tagged' tag=tag.slug %}">{{ tag.name }}</a>{% endfor %}
+        </div>
+    </div>

@@ -1,0 +1,6 @@
+{% load i18n %}
+                <li><a href='{% url 'helpdesk_list' %}'>{% trans "Tickets" %}</a></li>
+                <li><a href='{% url 'helpdesk_submit' %}'>{% trans "New Ticket" %}</a></li>
+                {% if helpdesk_settings.HELPDESK_KB_ENABLED %}
+                <li><a href='{% url 'helpdesk_kb_index' %}'>{% trans "Knowledgebase" %}</a></li>
+                {% endif %}

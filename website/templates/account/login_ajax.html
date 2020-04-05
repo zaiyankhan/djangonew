@@ -1,0 +1,90 @@
+{% load i18n %}
+{% load bootstrap3 %}
+{% load sekizai_tags %}
+{% load account socialaccount cms_tags %}
+<div class="row">
+    <div class="col-md-12">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#popsignup" aria-controls="popsignup" role="tab" data-toggle="tab">{% trans "Sign Up" %}</a>
+            </li>
+            <li role="presentation"><a href="#popsignin" aria-controls="popsignin" role="tab" data-toggle="tab">{% trans "Sign In" %}</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="popsignup">
+                <form class="signup ajax" id="signup_form" method="post" action="{% url 'account_signup' %}">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                    {% bootstrap_field signupform.email %}
+                </div>
+                <div class="col-md-6">
+                    {% bootstrap_field signupform.password1 %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {% bootstrap_field signupform.first_name %}
+                </div>
+                <div class="col-md-6">
+                    {% bootstrap_field signupform.last_name %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {% bootstrap_field signupform.interested_in %}
+                </div>
+                <div class="col-md-6">
+                    {% bootstrap_field signupform.receive_newsletter %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {% bootstrap_field signupform.company %}
+                </div>
+                <div class="col-md-6">
+                    {% bootstrap_field signupform.business_type %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {% bootstrap_field signupform.city %}
+                </div>
+                <div class="col-md-6">
+                    {% bootstrap_field signupform.state %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {% bootstrap_field signupform.country %}
+                </div>
+                <div class="col-md-6">
+                    {% bootstrap_field signupform.phone %}
+                </div>
+            </div>
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+            {% endif %}
+            <div>
+                <button type="submit" class="btn btn-success btn-md btn-block">{% trans "Sign Up" %}</button>
+            </div>
+        </form>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="popsignin">
+                <form class="login ajax" method="POST" action="{% url 'account_login' %}">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    {% endif %}
+                    <a class="button secondaryAction"
+                       href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                    <div>
+                        <button class="btn btn-success btn-md btn-block" type="submit">{% trans "Sign In" %}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

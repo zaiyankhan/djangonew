@@ -1,0 +1,28 @@
+{% load thumbnail %}{% if software.active and software.demo %}
+<div class="sub-pricing">
+    <div class="pricing-box dark-after">
+        <div class="pricing-icon text-info">{% if software.logo %}
+            {% thumbnail software.logo '100x100' crop upscale subject_location=backgroundheader.image.subject_location as thumb %}
+            <img src="{{ thumb.url }}" class="img-responsive center-block" alt="{{ software.name }}">
+        {% endif %}</div>
+        <div class="pricing-title">{{ software.name }} Demo</div>
+        <div class="pricing-details">
+            {{ software.short_description|safe|default_if_none:"&nbsp;" }}
+        </div>
+        <div class="pricing-amount">
+            <div>Starting at</div>
+        {% with software.starting_at_price as pricing %}
+            {% if pricing %}
+            <div class="price">
+                <span class="currency">$</span>
+                <span class="amount">{{ pricing.price|floatformat }}</span>
+                <span class="duration">{% if pricing.per %} / {{ pricing.per }}{% endif %}</span>
+            </div>
+            {% endif %}
+        {% endwith %}
+        </div>
+        <div class="pricing-button"><a href="{{ software.download_url }}" data-download-url="{{ software.download_url }}" class="{% if not user.is_authenticated %}download-software {% endif %}primary-button"
+                                       style="{% if instance.button_color %}background-color: {{ instance.button_color }};border-color:{{ instance.button_color }};{% if instance.button_text_color %}color:{{ instance.button_text_color }}{% endif %}{% endif %}">Download now</a></div>
+    </div>
+</div>
+{% endif %}

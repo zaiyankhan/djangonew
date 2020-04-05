@@ -1,0 +1,39 @@
+{% load static sekizai_tags %}
+
+{# DOCS: http://getbootstrap.com/javascript/#carousel #}
+<div id="js-carousel-id-{{ instance.pk }}" class="carousel-style-{{ instance.style }}
+    carousel{% if instance.transition_effect %} {{ instance.transition_effect }}{% endif %}
+    {{ instance.classes }}"
+    {% if instance.ride %}
+        data-ride="carousel"
+        data-interval="{{ instance.interval }}"
+    {% endif %}
+    {% if not instance.pause %}
+        data-pause=""
+    {% endif %}
+    {% if not instance.wrap %}
+        data-wrap=""
+    {% endif %}
+    {{ instance.attributes_str }}
+    >
+    {% block content_carousel %}{% endblock %}
+</div>
+{% addtoblock "js" %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var min_carousel_{{ instance.pk }}_height = 0;
+            $('#js-carousel-id-{{ instance.pk }} img.slider-image').each(function () {
+                $(this).hide();
+                var image = $(this).attr('src');
+                var height = $(this).closest('.item').height();
+                if (min_carousel_{{ instance.pk }}_height < height) {
+                    min_carousel_{{ instance.pk }}_height = height;
+                }
+                $(this).closest('.item').css('background-image', 'url("' + image + '")')
+            });
+            $('#js-carousel-id-{{ instance.pk }} .aligner').each(function () {
+               $(this).css('height', min_carousel_{{ instance.pk }}_height+"px");
+            });
+        });
+    </script>
+{% endaddtoblock %}

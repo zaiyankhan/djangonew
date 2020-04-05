@@ -1,0 +1,33 @@
+{% extends CMS_TEMPLATE %}
+{% load i18n cms_tags menu_tags %}
+{% block meta %}
+    {%  if meta %}
+        {% include "meta/meta.html" %}
+    {% endif %}
+{% endblock meta %}
+{% block content %}
+    <section class="section-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-md-9">
+                    {% block content_blog %}{% endblock %}
+                </div>
+                <aside class="col-sm-4 col-md-3 sidebar">
+                    {% block topsidebar %}
+                        {% placeholder topsidebar %}
+                    {% endblock topsidebar %}
+                    {% block subnav %}
+                        {% page_attribute menu_title request.current_page.get_root as subtitle %}
+                        <ul class="nav navbar-sidenav">
+                            {% show_menu 1 5 0 1 "includes/menu/sub_navigation.html" %}
+                        </ul>
+                        <hr/>
+                    {% endblock subnav %}
+                    {% block sidebar %}
+                        {% placeholder sidebar %}
+                    {% endblock sidebar %}
+                </aside>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

@@ -1,0 +1,31 @@
+{% extends "djangocms_blog/base.html" %}
+{% load i18n thumbnail cms_tags %}
+{% block meta_description %}{{ post.meta_description }}{% endblock meta_description %}
+{% block meta_keywords %}{{ post.meta_keywords }}{% endblock meta_keywords %}
+{% block canonical_url %}<link rel="canonical" href="{{ meta.url }}"/>{% endblock canonical_url %}
+{% block title %}{{ post.get_title }}{% endblock %}
+{% block content_blog %}
+    <article class="blog-item blog-single" id="post-{{ post.slug }}">
+        <div class="entry-media">
+            {% if post.main_image %}<a href="{{ post.get_absolute_url }}" class="el-link">
+                {% thumbnail post.main_image post.full_image_options.size crop=post.full_image_options.crop upscale=post.full_image_options.upscale subject_location=post.main_image.subject_location as thumb %}
+                <img src="{{ thumb.url }}" alt="{{ post.main_image.default_alt_text }}" class="img-responsive"/>
+            </a>{% endif %}
+            <div class="entry-date">
+                <span>{{ post.date_published|date:"M" }}</span>
+                <span>{{ post.date_published|date:"d" }}</span>
+            </div>
+        </div>
+        <h3>
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        </h3>
+        {% include "djangocms_blog/includes/blog_meta.html" %}
+        <div class="entry-excerpt">
+            {% if post.app_config.use_placeholder %}
+                {% render_placeholder post.content %}
+            {% else %}
+                {% render_model post "post_text" "post_text" "" "safe" %}
+            {% endif %}
+        </div>
+    </article>
+{% endblock content_blog %}

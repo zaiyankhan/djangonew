@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load i18n cms_tags menu_tags bootstrap3 sekizai_tags %}
+{% block robots %}<meta name="robots" content="noindex, nofollow">{% endblock %}
+{% block title %}Order checkout{% endblock %}
+{% block body_class %}{% endblock %}
+{% block breadcrumb %}
+        <div id="top-content" class="container-fluid inner-page"{% if backgroundheader %}
+             style="background-image: url('{{ thumb.url }}');"{% endif %}>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="page-title">Checkout</div>
+                        <div class="page-subtitle">
+                            {% static_placeholder 'Empty shopping cart feature' %}
+                        </div>
+                        <ul class="breadcrumb">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock breadcrumb %}
+{% block content %}
+    <div id="details" class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-6">
+                    {% if cart.count != 0 %}
+                    <h3>Billing Details</h3>
+                    {% if not user.is_authenticated %}
+                        <div class="alert alert-info">You need to log in or sign up, in order to complete the checkout
+                            process
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4 text-center">
+                                <a href="{% url 'account_login' %}" class="btn btn-primary btn-lg btn-block">Log in</a>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-md-offset-4 text-center">
+                                <a href="{% url 'account_signup' %}" class="btn btn-primary btn-lg btn-block">Sign
+                                    up</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <form method="post" id="checkout_form">
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+                        </form>
+                    {% endif %}
+                        {% else %}
+                        {% static_placeholder 'Empty shopping cart main content' %}
+                    {% endif %}
+                    {% static_placeholder 'Shopping cart main content' %}
+                </main>
+                <aside class="col-md-6">
+                    <h3>Your cart</h3>
+                    {% if cart.count == 0 %}
+                    <div class="alert alert-info"><i class="fa fa-shopping-basket"></i> Your shopping cart is empty
+                    </div>
+                    {% static_placeholder 'Empty shopping cart promotions' %}
+                    {% else %}
+                    {% include "shopping/cart_contents.html" %}
+                        {% if user.is_authenticated %}
+                        <hr/>
+                        <h3>Complete Checkout</h3>
+                        <div class="row" style="margin-top:15px;">
+                            <div class="col-sm-12 text-center">
+                                <a href="#" data-pay-method="paypal" class="paynow primary-button btn-block"><i
+                                        class="fa fa-paypal"></i> Pay with PayPal</a>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:45px;">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                {% include "includes/pay_methods.html" %}
+                            </div>
+                        </div>
+                            {% endif %}
+                    {% endif %}
+                    {% static_placeholder 'Cart promotions' %}
+                </aside>
+            </div>
+        </div>
+    </div>
+    {% addtoblock "js" %}
+    <script type="text/javascript">
+    $(document).on("click", ".paynow", function(){
+       $("#{{ form.pay_method.auto_id }}").val($(this).data("pay-method"));
+       $('#checkout_form').submit();
+    });
+    </script>
+    {% endaddtoblock %}
+{% endblock content %}

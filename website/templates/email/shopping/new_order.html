@@ -1,0 +1,31 @@
+{% extends "email/base.html" %}
+{% block content %}
+    <h1>Thank for your order</h1>
+    <p>Dear {{ full_name }},</p>
+    <p>Thank you for your order.</p>
+    <p>Your order code is <strong>{{ order.order_code }}</strong>.
+        Please use this for any communication with us related to your order</p>
+    <h2>Order details</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Order code</th>
+            <th>Items</th>
+            <th>Total</th>
+            <th>Placed on</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ order.order_code }}</td>
+                <td>{% for item in order.items.all %}
+                    {{ item.quantity }} x {{ item.name }} for $
+                    {{ item.price|floatformat }}{% if not forloop.last %}<br/>{% endif %}
+                {% endfor %}</td>
+                <td>$ {{ order.total|floatformat }}</td>
+                <td>{{ order.created_at|date }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr/>
+{% endblock %}

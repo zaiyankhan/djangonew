@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load i18n cms_tags %}
+{% block content %}
+<div id="content">
+
+    <!-- Section -->
+    <section>
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-lg-12">
+{% placeholder "Content Top" %}
+                    <section>
+                        <div class="text-center">
+                            <div class="row">
+                                <div class="col-lg-8 col-lg-push-2">
+                                    <div class="video-box placeholder-image text-center">
+                                        <div class="image">
+                                            <img src="{{ STATIC_URL }}/img/sliderbrightfarms-2.jpg" alt="">
+                                        </div>
+                                        <a href="https://www.youtube.com/embed/eQzX4CYYboM?rel=0&autoplay=1"
+                                           class="btn-play"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    {% placeholder "Content middle" %}
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-pills mb-40" role="tablist">
+                        <li class="active"><a href="#history" role="tab" data-toggle="tab">{% placeholder "Tab 1 title" %}</a></li>
+                        <li><a href="#mission" role="tab" data-toggle="tab">{% placeholder "Tab 2 title" %}</a></li>
+                        <li><a href="#food-quality" role="tab" data-toggle="tab">{% placeholder "Tab 3 title" %}</a></li>
+                        <li><a href="#whats-next" role="tab" data-toggle="tab">{% placeholder "Tab 4 title" %}</a></li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id="history">
+                            {% placeholder "Tab 1 text" %}
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="mission">
+                            {% placeholder "Tab 2 text" %}
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="food-quality">
+                            {% placeholder "Tab 3 text" %}
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="whats-next">
+                            {% placeholder "Tab 4 text" %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Section -->
+    <section class="bg-grey pt-30">
+        <div class="container">
+            <div class="row mb-30">
+                <!-- Member -->
+                <div class="col-md-4 mb-30">
+                    {% placeholder "Content CV Image" %}
+                    <div class="p-30 bg-white">
+                        {% placeholder "Content CV Title" %}
+                    </div>
+                </div>
+                <!-- Member -->
+                <div class="col-md-8 mb-30">
+                    {% placeholder "Content CV Text" %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock %}

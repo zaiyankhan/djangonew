@@ -1,0 +1,25 @@
+{% load thumbnail %}
+    <div class="text-center">
+    <p class="lead">{{ software.name }} {{ order_cart_item }} has been added to your cart</p>
+        <div class="sub-pricing hidden-xs">
+            <div class="pricing-box secondary-after{% if pricing.is_best_seller %} best-seller{% endif %}">
+                <div class="pricing-icon text-info">{% if software.logo %}
+                    {% thumbnail software.logo '100x100' crop upscale subject_location=backgroundheader.image.subject_location as thumb %}
+                    <img src="{{ thumb.url }}" class="img-responsive center-block" alt="{{ software.name }}">
+                {% endif %}</div>
+                <div class="pricing-title">{{ order_cart_item }}</div>
+                {% with order_cart_item.modules.all as software_modules %}{% if software_modules %}<strong>Plus:
+                {% for module in software_modules %}
+                {{ module.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+                </strong>{% endif %}{% endwith %}
+                <div class="pricing-amount">
+                    <div>{{ order_cart_item.quantity }} license{% if order_cart_item.quantity > 1 %}s{% endif %} Only</div>
+                    <div class="price">
+                        <span class="currency">$</span>
+                        <span class="amount">{{ order_cart_item.price|floatformat }}{% if order_cart_item.quantity > 1 %} per license{% endif %}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

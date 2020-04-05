@@ -1,0 +1,40 @@
+{% load aldryn_bootstrap3_tags thumbnail %}
+{% if promotional_box.apply_hover_effect %}
+    <div class="feature-box{% if promotional_box.is_active %} active{% endif %}" style="{% if promotional_box.text_color %}color:{{ promotional_box.text_color }};{% endif %}">
+    <div class="box-bg"
+         style="{% if promotional_box.background_color %}background-color:{{ promotional_box.background_color }};{% endif %}"></div>
+    <div class="feature-icon">
+        {% if promotional_box.image %}
+            {% thumbnail promotional_box.image '77x77' crop upscale subject_location=promotional_box.image.subject_location as thumb %}
+        <img src="{{ thumb.url }}" class="img-responsive center-block img-circle" alt="{{ promotional_box.title }}"/>
+        {% else %}
+            {% if promotional_box.icon %}
+                <i class="icon {{ promotional_box.icon|iconset_from_class }} {{ promotional_box.icon }}"></i>
+                {% endif %}
+            {% endif %}
+    </div>
+    <div class="feature-title">{{ promotional_box.title }}</div>
+    <div class="feature-details">
+        {{ promotional_box.info|default_if_none:""|safe }}
+    </div>
+    {% with promotional_box.get_link_url as link %}{% if link %}<div class="feature-button">
+        <a style="{% if promotional_box.button_color %}background-color: {{ promotional_box.button_color }};border-color:{{ promotional_box.button_color }};{% if promotional_box.button_text_color %}color:{{ promotional_box.button_text_color }}{% endif %}{% endif %}" class="all-feature-button" href="{{ link }}">{{ promotional_box.link_text|default_if_none:"Read more" }}</a>
+    </div>
+    {% endif %}{% endwith %}
+</div>
+{% else %}
+<div class="mfeature-box" style="{% if promotional_box.background_color %}background-color:{{ promotional_box.background_color }};{% endif %}{% if promotional_box.text_color %}color:{{ promotional_box.text_color }};{% endif %}">
+    <div class="mfeature-icon">
+        <i class="icon {{ promotional_box.icon|iconset_from_class }} {{ promotional_box.icon }}"></i>
+    </div>
+    <div class="mfeature-title">{{ promotional_box.title }}</div>
+    <div class="mfeature-details">{{ promotional_box.info|default_if_none:"" }}
+    </div>
+    {% with promotional_box.get_link_url as link %}{% if link %}
+        <div class="feature-button">
+            <a style="{% if promotional_box.button_color %}background-color: {{ promotional_box.button_color }};border-color:{{ promotional_box.button_color }};{% if promotional_box.button_text_color %}color:{{ promotional_box.button_text_color }}{% endif %}{% endif %}" class="all-feature-button"
+               href="{{ link }}">{{ promotional_box.link_text|default_if_none:"Read more" }}</a>
+        </div>
+    {% endif %}{% endwith %}
+</div>
+{% endif %}

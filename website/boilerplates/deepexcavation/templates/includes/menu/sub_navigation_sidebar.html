@@ -1,0 +1,30 @@
+{% load i18n menu_tags cache %}
+{# DOCS: http://django-cms.readthedocs.org/en/latest/advanced/templatetags.html#show-menu-examples #}
+
+{% for child in children %}
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="menuitem_{{ forloop.counter }}">
+            <h4 class="panel-title">
+                {% if child.children %}
+                <a class="{% if not child.selected %}collapsed{% endif %}" role="button" data-toggle="collapse" data-parent="#submenu_accordion" href="#collapsemenu_{{ forloop.counter }}"
+                   aria-expanded="true" aria-controls="collapsemenu_{{ forloop.counter }}">
+                    {{ child.get_menu_title }}
+                </a>
+                    {% else %}
+                    <a href="{{ child.get_absolute_url }}" class="collapsed">
+                        {{ child.get_menu_title }}
+                    </a>
+                {% endif %}
+            </h4>
+        </div>
+        {% if child.children %}
+        <div id="collapsemenu_{{ forloop.counter }}" class="panel-collapse collapse{% if child.selected %} in{% endif %}" role="tabpanel" aria-labelledby="menuitem_{{ forloop.counter }}">
+            <div class="panel-body">
+                <ul class="list-unstyled">
+                    {% show_menu from_level to_level extra_inactive extra_active "includes/menu/sub_navigation.html" "" "" child %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+    </div>
+{% endfor %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n cms_tags menu_tags %}
+
+{% block body_class %}{% endblock %}
+
+{% block content %}
+    {% static_placeholder "Static below header" %}
+    <section class="section-content container-fluid">
+        <div class="container">
+            {% placeholder top_content %}
+            <div class="row">
+                <main class="col-md-12">
+                    {% placeholder content %}
+                </main>
+            </div>
+            {% placeholder bottom_content %}
+        </div>
+    </section>
+{% endblock content %}

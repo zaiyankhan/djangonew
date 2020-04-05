@@ -1,0 +1,94 @@
+{% extends "base_root.html" %}
+{% load i18n staticfiles cms_tags menu_tags thumbnail websiteTags bootstrap3 %}
+
+{% block body_class %}{% endblock %}
+
+{# no indent for better readability on extend_root #}
+{% block extend_root %}
+    <nav id="mainNav" class="navbar navbar-default navbar-full navbar-fixed-top">
+    <div class="container-fluid top-menu hidden-xs">
+            <div class="container">
+                {% show_menu_below_id "top-menu" 0 100 100 100 "includes/menu/top-menu.html" %}
+            </div>
+    </div>
+        <div class="container container-nav">
+            <div class="navbar-header">
+                <button aria-expanded="false" type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/">
+                    <img class="logo" src="{{ STATIC_URL }}images/logo.svg" alt="DeepExcavation">
+                </a>
+            </div>
+            <div style="height: 1px;" role="main" aria-expanded="false" class="navbar-collapse collapse" id="bs">
+                <ul class="nav navbar-nav navbar-right">
+                    {% show_menu 0 100 100 100 'includes/menu/navigation.html' %}
+                    <li><a href="{% url 'show-cart' %}" rel="nofollow"><i class="fa fa-shopping-basket"></i> <small id="num-cart-items">{% shopping_cart as cart %}{{ cart.count }}</small></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% block header %}
+{% endblock header %}
+{% block breadcrumb %}
+    {% if not request.current_page.is_home %}
+        {% page_background as backgroundheader %}
+        {% if backgroundheader %}
+            {% thumbnail backgroundheader.image '1920x220' crop upscale subject_location=backgroundheader.image.subject_location as thumb %}
+        {% endif %}
+
+        <div id="top-content" class="container-fluid inner-page"{% if backgroundheader %} style="background-image: url('{{ thumb.url }}');"{% endif %}>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="page-title">{% page_attribute menu_title request.current_page %}</div>
+                        <div class="page-subtitle">
+                            {% block feature %}{% placeholder "feature" %}{% endblock feature %}
+                            {% static_placeholder "Static placeholder below menu" %}
+                        </div>
+                        <ul class="breadcrumb">
+                            {% block extend_breadcrumb %}
+                                {% show_breadcrumb 0 "includes/menu/breadcrumb.html" %}
+                            {% endblock extend_breadcrumb %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock breadcrumb %}
+
+{% block extend_base %}
+    {% block messages %}
+        <div class="messages-overlay">{% bootstrap_messages %}</div>
+    {% endblock messages %}
+    {% block content %}{% endblock %}
+{% endblock extend_base %}
+    {% static_placeholder "Static above footer" %}
+{% block footer %}
+    <footer id="footer" class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-1">
+                    <img class="logo-mini" src="{{ STATIC_URL }}images/logo_icon.svg" alt="DeepExcavation"/>
+                </div>
+                {% show_menu_below_id "footer-menu" 0 100 100 100 "includes/menu/footer-menu.html" %}
+                <div class="col-xs-12 col-sm-4 col-md-5">
+                    {% static_placeholder "Footet contact details" %}
+                </div>
+            </div>
+            <div class="row" style="margin-top:45px;">
+                <div class="col-xs-6 col-sm-6">
+                    copyright &copy; {% now "Y" %} deepexcavation.com
+                </div>
+                <div class="col-xs-6 col-sm-4 col-sm-offset-2">
+                    {% include "includes/pay_methods.html" %}
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock footer %}
+{% endblock extend_root %}

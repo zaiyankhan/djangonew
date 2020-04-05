@@ -1,0 +1,79 @@
+{% extends "helpdesk/base.html" %}
+{% load i18n humanize %}
+{% load static from staticfiles %}
+{% block helpdesk_title %}{% trans "Tickets" %}{% endblock %}
+{% block helpdesk_head %}
+<script type='text/javascript' language='javascript' src='{% static "helpdesk/filter.js" %}'></script>
+<script type='text/javascript' language='javascript'>
+$(document).ready(function() {
+
+    // Enable Tabs
+    $("#searchtabs").tabs({
+        collapsible:true
+    });
+    // Hide all tabs by default
+    $("#searchtabs > ul > li").removeClass().addClass("ui-corner-top ui-state-default");
+    $("#searchtabs > div").addClass("ui-tabs-hide");
+
+    $("#select_all").click(function() {
+        $(".ticket_multi_select").attr('checked', true);
+        return false;
+    });
+    $("#select_none").click(function() {
+        $(".ticket_multi_select").attr('checked', false);
+        return false;
+    });
+    $("#select_inverse").click(function() {
+        $(".ticket_multi_select").each(function() {
+            $(this).attr('checked', !$(this).attr('checked'));
+        });
+        return false;
+    });
+});
+</script>
+{% endblock %}
+{% block h1_title %}Tickets
+    {% if from_saved_query %} [{{ saved_query.title }}]{% endif %}{% endblock %}
+{% block helpdesk_body %}
+
+{% load in_list %}
+{{ search_message|safe }}
+<form method='post' action='{% url 'helpdesk_mass_update' %}' id="ticket_mass_update">
+<table class="table table-hover table-bordered table-striped">
+<caption>{% trans "Tickets" %}</caption>
+<thead>
+<tr><th>#</th><th>{% trans "Pr" %}</th><th>{% trans "Title" %}</th><th>{% trans "Queue" %}</th><th>{% trans "Status" %}</th><th>{% trans "Created" %}</th><th>{% trans "Owner" %}</th></tr>
+</thead>
+<tbody>
+{% for ticket in tickets.object_list %}
+<tr class="{{ ticket.get_priority_css_class }}">
+<th><a href='{{ ticket.get_absolute_url }}'>{{ ticket.ticket }}</a></th>
+<td>{{ ticket.priority }}</td>
+<th><a href='{{ ticket.get_absolute_url }}'>{{ ticket.title }}</a></th>
+<td>{{ ticket.queue }}</td>
+<td>{{ ticket.get_status }}</td>
+<td><span title='{{ ticket.created|date:"r" }}'>{{ ticket.created|naturaltime }}</span></td>
+<td>{{ ticket.get_assigned_to }}</td>
+</tr>
+{% empty %}
+<tr><td colspan='5'>{% trans "No Tickets Match Your Selection" %}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+<div class="pagination">
+    <span class="step-links">
+        {% if tickets.has_previous %}
+            <a href="?{% if query_string %}{{ query_string }}&amp;{% endif %}page={{ tickets.previous_page_number }}">{% trans "Previous" %}</a>
+        {% endif %}
+
+        <span class="current">
+            {% blocktrans with tickets.number as ticket_num and tickets.paginator.num_pages as num_pages %}Page {{ ticket_num }} of {{ num_pages }}.{% endblocktrans %}
+        </span>
+
+        {% if tickets.has_next %}
+            <a href="?{% if query_string %}{{ query_string }}&amp;{% endif %}page={{ tickets.next_page_number }}">{% trans "Next" %}</a>
+        {% endif %}
+    </span>
+</div>
+{% csrf_token %}</form>
+{% endblock %}

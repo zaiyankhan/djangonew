@@ -1,0 +1,12 @@
+{% load i18n menu_tags cache %}
+<div class="pull-right">
+<ul class="list-inline">
+{% for child in children %}
+    <li class="{% if child.selected %} active{% endif %}">
+        <a href="{{ child.get_absolute_url }}">
+            {{ child.get_menu_title }}
+        </a>
+    </li>
+{% endfor %}
+</ul>
+</div>

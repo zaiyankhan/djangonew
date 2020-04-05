@@ -1,0 +1,41 @@
+{% load cms_tags %}
+
+{# INFO: slide for a SlideCMSPlugin instance #}
+<div class="item
+    {% if forloop.first %} active{% endif %}
+    {% if instance.classes %} {{ instance.classes }}{% endif %}">
+    {% with image=instance.image %}
+        {% if image %}
+            {% with image=instance.image srcset=carousel.srcset %}{% include 'aldryn_bootstrap3/plugins/carousel/fullwidth/includes/image.html' %}{% endwith %}
+        {% endif %}
+    {% endwith %}
+
+    {% if instance.content or instance.child_plugin_instances %}
+        <div class="container-fluid slider-caption">
+        <div class="container">
+            <div class="row aligner">
+                {% with instance.child_plugin_instances as plugins %}
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                {% if plugins %}
+                {% for plugin in plugins %}
+                    {% render_plugin plugin %}
+                {% endfor %}
+                    {% else %}
+                    &nbsp;
+                    {% endif %}
+            </div>
+            <div class="col-md-8 col-sm-6 hidden-xs">
+                {{ instance.content|safe }}
+                {% with link=instance.get_link_url %}
+                    {% if link %}
+                        <a class="btn btn-info btn-lg" href="{{ link }}"{% if instance.link_target %}
+                           target="{{ instance.link_target }}"{% endif %} {{ instance.attributes_str }}>{{ instance.link_text }}</a>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        {% endwith %}
+        </div>
+        </div>
+        </div>
+    {% endif %}
+</div>

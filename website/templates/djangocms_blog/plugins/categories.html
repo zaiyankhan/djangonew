@@ -1,0 +1,9 @@
+{% load i18n %}{% spaceless %}
+    <div class="widget">
+        <ul class="list-group">
+            {% for category in categories.all %}<li class="list-group-item">
+                <a href="{% url 'djangocms_blog:posts-category' category=category.slug %}">{{ category.name }}</a>
+            </li>{% endfor %}
+        </ul>
+    </div>
+{% endspaceless %}

@@ -1,0 +1,27 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block head_title %}Account details{% endblock %}
+{% block title %}Account details {{ block.super }}{% endblock %}
+{% block content %}
+<h1>Account details</h1>
+
+<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+  {% csrf_token %}
+    {% bootstrap_form form %}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button type="submit" class="btn btn-primary">Update</button>
+</form>
+
+{% endblock %}
+{% block sub_nav %}
+    {% include "account/profile_sub_nav.html" %}
+{% endblock sub_nav %}
+{% block breadcrumb_content %}
+    {{ block.super }}
+    <li class="child active"><a href="{% url 'user-account-details' %}">Account details</a></li>
+{% endblock %}

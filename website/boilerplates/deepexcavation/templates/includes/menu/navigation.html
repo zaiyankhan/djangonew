@@ -1,0 +1,15 @@
+{% load i18n menu_tags cache %}
+{% for child in children %}
+<li class="{% if child.children %} dropdown{% endif %}{% if child.selected %} active{% endif %}{% if forloop.first %} first{% endif %}{% if forloop.last %} last{% endif %}">
+    <a style="{% if child.attr.color %}color:{{ child.attr.color }};{% endif %}"  href="{{ child.get_absolute_url }}">
+        {% if child.attr.button_like %}<span style="border-radius: 8px;padding:5px 8px;{% if child.attr.background_color %}background-color:{{ child.attr.background_color }};{% endif %}">{% endif %}
+            {{ child.get_menu_title }}
+        {% if child.attr.button_like %}</span>{% endif %}
+    </a>
+    {% if child.children %}
+        <ul class="dropdown-menu">
+            {% show_menu from_level to_level extra_inactive extra_active "includes/menu/sub_navigation.html" "" "" child %}
+        </ul>
+    {% endif %}
+</li>
+{% endfor %}

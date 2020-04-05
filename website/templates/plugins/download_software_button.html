@@ -1,0 +1,3 @@
+<a href="{{ instance.software.download_url }}" data-download-url="{{ instance.software.download_url }}"
+   style="{% if instance.button_color %}background-color: {{ instance.button_color }};border-color:{{ instance.button_color }};{% if instance.button_text_color %}color:{{ instance.button_text_color }}{% endif %}{% endif %}"
+   class="{% if not user.is_authenticated %}download-software {% endif %}{{ instance.css_class|default:"" }}">{{ instance.title }}</a>

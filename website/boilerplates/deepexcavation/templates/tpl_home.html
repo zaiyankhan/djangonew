@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load i18n cms_tags sekizai_tags %}
+{% block content %}
+        {% placeholder "HomeTop" %}
+    <div class="features" class="container-fluid">
+        <div class="container">
+            {% placeholder "Features" %}
+        </div>
+    </div>
+    <div class="pricing" class="container-fluid">
+        <div class="container">
+            {% placeholder "Products and pricing" %}
+        </div>
+    </div>
+    <div class="info" class="container-fluid">
+        <div class="container">
+            {% placeholder "Content area" %}
+        </div>
+    </div>
+    <div class="more-info" class="container-fluid">
+        <div class="container">
+            {% placeholder "More info" %}
+        </div>
+    </div>
+    <div class="more-features" class="container-fluid">
+        <div class="container">
+            {% placeholder "More features" %}
+        </div>
+    </div>
+    <div class="testimonials" class="container-fluid">
+        <div class="container">
+            {% placeholder "Testimonials" %}
+        </div>
+    </div>
+{% endblock %}

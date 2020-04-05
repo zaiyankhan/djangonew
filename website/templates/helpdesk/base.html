@@ -1,0 +1,88 @@
+{% extends "account/base.html" %}
+{% load i18n sekizai_tags %}
+{% load saved_queries %}
+{% load load_helpdesk_settings %}
+{% load static from staticfiles %}
+{% with request|load_helpdesk_settings as helpdesk_settings %}
+    {% with user|saved_queries as user_saved_queries_ %}
+{% load bootstrap3 %}
+
+{% block head_title %}Account details{% endblock %}
+{% block title %}Account details {{ block.super }}{% endblock %}
+{% block content %}
+    {% block helpdesk_body %}{% endblock %}
+{% endblock %}
+{% block sub_nav %}
+    {% include "account/profile_sub_nav.html" %}
+{% endblock sub_nav %}
+{% block breadcrumb_content %}
+    {{ block.super }}
+    <li class="child active"><a href="{% url 'user-account-details' %}">Account details</a></li>
+{% endblock %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block helpdesk_title %}Helpdesk{% endblock %} :: {% trans "Powered by django-helpdesk" %}</title>
+
+        <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+        <script src="{% static 'helpdesk/jquery-1.12.4.min.js' %}" type='text/javascript'></script>
+        <script src='{% static "helpdesk/jquery-ui-1.12.0.min.js" %}' type='text/javascript' language='javascript'></script>
+        <link rel='stylesheet' href='{% static "helpdesk/helpdesk-extend.css" %}' type='text/css'  media="screen" >
+
+        <!--link rel='stylesheet' href='{% static "helpdesk/helpdesk-print.css" %}' type='text/css' media="print" /-->
+        <!--link rel='stylesheet' href='{% static "helpdesk/jquery-smoothness-theme/jquery-ui-1.8.9.custom.css" %}' type='text/css' /-->
+        {% if helpdesk_settings.HELPDESK_USE_CDN %}
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+        {% else %}
+        <script src="{% static 'helpdesk/bootstrap/bootstrap-3.3.7.min.js' %}" type='text/javascript'></script>
+        <link href="{% static 'helpdesk/bootstrap/bootstrap-3.3.7.min.css' %}" rel="stylesheet">
+        {% endif %}
+        <link rel='alternate' href='{% url 'helpdesk_rss_user' user.get_username %}' type='application/rss+xml' title='{% trans "My Open Tickets" %}' />
+        <link rel='alternate' href='{% url 'helpdesk_rss_activity' %}' type='application/rss+xml' title='{% trans "All Recent Activity" %}' />
+        <link rel='alternate' href='{% url 'helpdesk_rss_unassigned' %}' type='application/rss+xml' title='{% trans "Unassigned Tickets" %}' />
+
+        <style type="text/css">
+        /* hide google translate top bar */
+        .goog-te-banner-frame {display: none !important;}
+        .goog-te-balloon-frame {display: none !important;}
+        /* hide google translate tooltips (generated for every translated item) */
+        .goog-tooltip {display: none !important; }
+        </style>
+
+        <style type="text/css">
+        /* header */
+        #dropdown li.headerlink { width: auto; float: left; text-align: center; }
+
+        /* query list */
+        #dropdown li.headerlink ul {    display: none;
+                                        text-align: left;
+                                        position: absolute;
+                                        padding: 5px;
+                                        z-index: 2; }
+        /* query entries */
+        #dropdown li.headerlink:hover ul { display: block; width: auto; }
+        #dropdown li.headerlink:hover ul li { padding: 5px; margin: 1px; float: none; display: block; }
+        </style>
+
+        {% block helpdesk_head %}{% endblock %}
+    </head>
+    <body id="helpdesk-body">
+        <div id='container' class="container">
+            <div id='header' class="row">
+                <h1>{% block h1_title %}{% trans "Helpdesk" %}{% endblock %}</h1>
+
+            </div>
+
+            <div id='body' class="row">
+
+            </div>
+
+        </div>
+    </body>
+</html>
+{% endwith %}
+{% endwith %}

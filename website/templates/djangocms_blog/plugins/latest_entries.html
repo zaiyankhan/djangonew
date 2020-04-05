@@ -1,0 +1,9 @@
+{% load i18n %}
+<div class="widget">
+    <h5 class="widget-title">Recent Posts</h5>
+    <div class="recent-posts">
+        {% for post in posts_list %}
+            {% include "djangocms_blog/includes/blog_item_latest.html" with post=post %}
+        {% endfor %}
+    </div>
+</div>

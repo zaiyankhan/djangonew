@@ -1,0 +1,6 @@
+{% load thumbnail %}<div class="rp-item">
+    {% if post.main_image %}{% thumbnail '69x69' crop=post.thumbnail_options.crop upscale=post.thumbnail_options.upscale subject_location=post.main_image.subject_location as thumb %}
+    <img src="{{ thumb.url }}" alt="{{ post.main_image.default_alt_text }}" class="img-responsive"/>{% endif %}
+    <h5><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
+    <div class="rp-date">{{ post.date_published|date:"DATE_FORMAT" }}</div>
+</div>

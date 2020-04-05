@@ -1,0 +1,6 @@
+<script type="text/javascript">
+    var user_country = '{{ request.geo_data.country_code|default_if_none:"" }}';
+    var user_city = '{{ request.geo_data.city|default_if_none:"" }}';
+    var user_region = '{{ request.geo_data.region|default_if_none:"" }}';
+    var user_postal_code = '{{ request.geo_data.postal_code|default_if_none:"" }}';
+</script>

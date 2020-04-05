@@ -1,0 +1,13 @@
+{% load i18n menu_tags cache %}
+{% for child in children %}
+    <div class="col-xs-6 col-sm-4 col-md-2">
+        <h4><a href="{{ child.get_absolute_url }}">
+            {{ child.get_menu_title }}
+        </a></h4>
+        <ul class="footer-menu">
+            {% if child.children %}
+                    {% show_menu from_level to_level extra_inactive extra_active "includes/menu/sub_navigation.html" "" "" child %}
+            {% endif %}
+        </ul>
+    </div>
+{% endfor %}

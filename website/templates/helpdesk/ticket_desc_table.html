@@ -1,0 +1,52 @@
+{% load i18n humanize %}
+{% load static from staticfiles %}
+<table class="table table-hover table-bordered table-striped">
+<thead>
+    <tr class='row_tablehead'><td colspan='2'><h3>{{ ticket.id }}. {{ ticket.title }} [{{ ticket.get_status }}]</h3>
+    <a href='{% url 'helpdesk_delete' ticket.id %}' class="ticket-delete"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+    {% if ticket.on_hold %} | <a href='{% url 'helpdesk_unhold' ticket.id %}' class="ticket-hold">{% trans "Unhold" %}</a>{% else %} | <a href='{% url 'helpdesk_hold' ticket.id %}' class="ticket-hold">{% trans "Hold" %}</a>{% endif %}
+    </td></tr>
+<tr><th colspan='2'>{% blocktrans with ticket.queue as queue %}Queue: {{ queue }}{% endblocktrans %}</th></tr>
+</thead>
+<tbody>
+{% for customfield in ticket.ticketcustomfieldvalue_set.all %}
+<tr>
+    <th>{{ customfield.field.label }}</th>
+    <td>{% ifequal customfield.field.data_type "url" %}<a href='{{ customfield.value }}'>{{ customfield.value }}</a>{% else %}{{ customfield.value }}{% endifequal %}</td>
+</tr>{% endfor %}
+
+<tr>
+    <th colspan='2'>{% trans "Description" %}</th>
+</tr>
+<tr>
+    <td id="ticket-description" colspan='2'>{{ ticket.description|force_escape|urlizetrunc:50|linebreaksbr }}</td>
+</tr>
+
+{% if ticket.resolution %}<tr>
+    <th colspan='2'>{% trans "Resolution" %}{% ifequal ticket.get_status_display "Resolved" %} <a href='?close'><img src='{% static "helpdesk/buttons/accept.png" %}' alt='{% trans "Accept" %}' title='{% trans "Accept and Close" %}' width='60' height='15' /></a>{% endifequal %}</th>
+</tr>
+<tr>
+    <td colspan='2'>{{ ticket.resolution|force_escape|urlizetrunc:50|linebreaksbr }}</td>
+</tr>{% endif %}
+<tr>
+    <th>{% trans "Submitted On" %}</th>
+    <td>{{ ticket.created|date:"r" }} ({{ ticket.created|naturaltime }})</td>
+</tr>
+
+<tr>
+    <th>{% trans "Assigned To" %}</th>
+    <td>{{ ticket.get_assigned_to }}{% ifequal ticket.get_assigned_to _('Unassigned') %}{% endifequal %}</td>
+</tr>
+
+<tr>
+    <th>{% trans "Submitter E-Mail" %}</th>
+    <td>{{ ticket.submitter_email }}{% if user.is_superuser %} <strong><a href='{% url 'helpdesk_email_ignore_add' %}?email={{ ticket.submitter_email }}'>{% trans "Ignore" %}</a></strong>{% endif %}</td>
+</tr>
+
+<tr>
+    <th>{% trans "Priority" %}</th>
+    <td>{{ ticket.get_priority_display }}</td>
+</tr>
+
+</tbody>
+</table>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">
+	<path fill="#010101" d="M14,32C6.3,32,0,25.7,0,18C0,10.3,6.3,4,14,4v2C7.4,6,2,11.4,2,18c0,6.6,5.4,12,12,12c6.6,0,12-5.4,12-12h2
+	C28,25.7,21.7,32,14,32z"/>
+	<path fill="#010101" d="M32,16H16V0h1c7.7,0,15,7.3,15,15V16z M18,14h12C29.4,8,24,2.6,18,2V14z"/>
+</svg>

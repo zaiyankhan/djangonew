@@ -1,0 +1,19 @@
+{% load menu_tags %}<li>
+        <div class="row">
+            {% for child in children %}
+            <div class="col-sm-4">
+        <h5><a href="{{ child.get_absolute_url }}">
+        {{ child.get_menu_title }}
+        </a></h5>
+            <hr/>
+            {% if child.children %}
+                {% show_menu from_level to_level extra_inactive extra_active "includes/menu/sub_navigation_plain.html" "" "" child %}
+                {% else %}
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat</p>
+            {% endif %}
+            </div>
+                {% endfor %}
+        </div>
+</li>

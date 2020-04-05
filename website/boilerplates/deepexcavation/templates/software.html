@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load i18n cms_tags menu_tags %}
+
+{% block body_class %}tpl-sidebar-right{% endblock %}
+
+{% block content %}
+    <section class="section-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-md-9">
+                <article class="portfolio-single">
+                    <div class="entry-featured">
+                        {% placeholder "content top" %}
+                    </div>
+                    {% placeholder content %}
+                </article>
+                </div>
+                <!-- Sidebar -->
+                <aside class="sidebar col-md-3 clearfix">
+                    {% block subnav %}
+                        {% page_attribute menu_title request.current_page.get_root as subtitle %}
+                        <ul class="nav navbar-sidenav">
+                            {% show_menu 2 5 0 1 "includes/menu/sub_navigation.html" %}
+                        </ul><hr/>
+                    {% endblock subnav %}
+
+                    {% block sidebar %}
+                        {% placeholder sidebar %}
+                    {% endblock sidebar %}
+                </aside>
+
+            </div>
+        </div>
+
+    </section>
+{% endblock content %}

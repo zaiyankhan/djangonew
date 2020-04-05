@@ -1,0 +1,45 @@
+{% load i18n %}{% if page.paginator.num_pages > 1 %}
+<nav class="text-center">
+    <ul class="pagination">
+        {% if page.has_previous %}
+            <li>
+                <a href="?page={{ page.previous_page_number }}{{ GET_string }}" aria-label="Previous">
+                    <i class="ti-arrow-left"></i>
+                </a>
+            </li>{% endif %}
+        {% for page_number in begin %}
+            {% if page.number == page_number %}
+                <li class="active"><a href="#">{{ page_number }}</a></li>
+            {% else %}
+                <li><a href="?page={{ page_number }}{{ GET_string }}">{{ page_number }}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if middle %}
+            <li>...</li>
+            {% for page_number in middle %}
+                {% if page.number == page_number %}
+                    <li class="active"><a href="#">{{ page_number }}</a></li>
+                {% else %}
+                    <li><a href="?page={{ page_number }}{{ GET_string }}">{{ page_number }}</a></li>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% if end %}
+            <li>...</li>
+            {% for page_number in end %}
+                {% if page.number == page_number %}
+                    <li class="active"><a href="#">{{ page_number }}</a></li>
+                {% else %}
+                    <li><a href="?page={{ page_number }}{{ GET_string }}">{{ page_number }}</a></li>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% if page.has_next %}
+            <li>
+                <a href="?page={{ page.next_page_number }}{{ GET_string }}" aria-label="Next">
+                    <i class="ti-arrow-right"></i>
+                </a>
+            </li>{% endif %}
+    </ul>
+</nav>
+{% endif %}

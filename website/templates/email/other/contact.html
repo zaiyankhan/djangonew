@@ -1,0 +1,22 @@
+{% extends "email/base.html" %}
+{% block content %}
+<h1>Contact form details</h1>
+<table>
+<tr>
+    <th>Name</th><td>{{ contact_details.name }}</td>
+</tr>
+<tr>
+    <th>Email</th><td><a href="mailto:{{ contact_details.email }}">{{ contact_details.email }}</a></td>
+</tr>
+    <tr>
+        <th>Telephone</th>
+        <td>{{ contact_details.phone }}</td>
+    </tr>
+<tr>
+    <th>Message</th><td>{{ contact_details.message }}</td>
+</tr>
+</table>
+{% endblock %}
+{% block title %}
+Contact form details
+{% endblock %}

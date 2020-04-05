@@ -1,0 +1,36 @@
+{% load websiteTags %}<table class="table table-resonsive">{% shopping_cart as cart %}
+    <thead>
+    <th>Item</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th>Total</th>
+    <th>&nbsp;</th>
+    </thead>
+    <tbody>
+    {% for item in cart.items %}
+        <tr>
+            <td>{{ item.product }}
+                {% with item.product.modules.all as software_modules %}{% if software_modules %}<br/>Plus:
+                    {% for module in software_modules %}
+                        {{ module.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                {% endif %}{% endwith %}</td>
+            <td>{{ item.quantity }}</td>
+            <td>$ {{ item.price|floatformat:2 }}</td>
+            <td>$ {{ item.subtotal|floatformat:2 }}</td>
+            <td><a href="{% url 'remove-from-cart' item.product.pk %}" data-toggle="tooltip" data-title="Remove from cart"><i class="fa fa-trash-o"></i></a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+    <tr>
+        <td><a href="#" class="btn btn-sm btn-danger empty-cart"
+               data-action-url="{% url 'clear-cart' %}"><i class="fa fa-trash-o"></i> Empty cart</a>
+        </td>
+        <td colspan="2" class="text-right">
+            <strong class="lead">Total:</strong>
+        </td>
+        <td><strong class="lead text-success">$ {{ cart.total|floatformat:2 }}</strong></td>
+    </tr>
+    </tfoot>
+</table>

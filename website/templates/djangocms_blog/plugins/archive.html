@@ -1,0 +1,15 @@
+{% load i18n %}
+<div class="widget">
+    <h5 class="widget-title">Archives</h5>
+    {% regroup dates by date.year as years %}
+    {% with current_year=year current_month=month %}
+    <ul class="nav navbar-sidenav">{% for year in years %}
+        {% for month in year.list %}
+        <li>
+            <a href="{% url 'djangocms_blog:posts-archive' year=year.grouper month=month.date|date:"n" %}">{{ month.date|date:"F" }} ({{ year.grouper }})</a>
+        </li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+    {% endwith %}
+</div>

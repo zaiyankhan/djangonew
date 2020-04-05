@@ -1,0 +1,10 @@
+{% load i18n %}{% block title %}New email{% endblock %}
+----------------------------------------
+
+
+{% block content %}{% endblock %}
+
+
+-------------------------------------
+
+{% blocktrans %}DeepExcavation, All rights reserved.{% endblocktrans %}

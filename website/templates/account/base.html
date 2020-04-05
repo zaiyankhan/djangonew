@@ -1,0 +1,46 @@
+{% extends "base.html" %}{% load i18n cms_tags menu_tags %}
+{% block breadcrumb %}
+        <div id="top-content" class="container-fluid inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="page-title">{% block head_title %}{% endblock %}</div>
+                        <div class="page-subtitle">
+                            {% block feature %}{% static_placeholder accounts_feature %}{% endblock feature %}
+                        </div>
+                        <ul class="breadcrumb">
+{% block breadcrumb_content %}<li class="child"><a href="/">Home</a></li>{% endblock %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock breadcrumb %}
+{% block body_class %}{% endblock %}
+
+{% block extend_base %}
+    <div id="details" class="container-fluid">
+        <div class="container">
+            {% static_placeholder "Accounts top content" %}
+            <div class="row">
+                <main class="col-md-8">
+                    {% block content %}{% endblock content %}
+                </main>
+                <aside class="col-md-4">
+                    {% block sidebar %}
+                        {% static_placeholder "Accounts sidebar" %}
+                    {% endblock sidebar %}
+                    {% block sub_nav %}
+                    {% endblock sub_nav %}
+                    {% block bottom_sidebar %}
+                        {% static_placeholder "Accounts bottom sidebar" %}
+                    {% endblock bottom_sidebar %}
+                </aside>
+            </div>
+            {% static_placeholder "Accounts bottom content" %}
+        </div>
+    </div>
+{% endblock extend_base %}
+
+
+

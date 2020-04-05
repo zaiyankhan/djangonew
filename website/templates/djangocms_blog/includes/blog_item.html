@@ -1,0 +1,25 @@
+{% load i18n thumbnail cms_tags %}
+
+<article class="blog-item" id="post-{{ post.slug }}">
+    <div class="entry-media">
+        {% if image and post.main_image %}<a href="{{ post.get_absolute_url }}" class="el-link">
+            {% thumbnail post.main_image post.thumbnail_options.size crop=post.thumbnail_options.crop upscale=post.thumbnail_options.upscale subject_location=post.main_image.subject_location as thumb %}
+            <img src="{{ thumb.url }}" alt="{{ post.main_image.default_alt_text }}" class="img-responsive"/>
+        </a>{% endif %}
+        <div class="entry-date">
+            <span>{{ post.date_published|date:"M" }}</span>
+            <span>{{ post.date_published|date:"d" }}</span>
+        </div>
+    </div>
+    <h3>
+        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+    </h3>
+    {% include "djangocms_blog/includes/blog_meta.html" %}
+    <div class="entry-excerpt">
+        {% if not TRUNCWORDS_COUNT %}
+            {% render_model post "abstract" "" "" "safe" %}
+        {% else %}
+            {% render_model post "abstract" "" "" "truncatewords_html:TRUNCWORDS_COUNT|safe" %}
+        {% endif %}
+    </div>
+</article>

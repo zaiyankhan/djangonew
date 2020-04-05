@@ -1,0 +1,221 @@
+.widget{
+    margin-bottom: 40px;
+    font-family: @font-text;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 24px;
+
+    h5, .widget-title{
+        font-family: @font-title;
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: @color-title;
+        letter-spacing: 0.7px;
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    ul, ol{
+        margin: 0px;
+        padding: 0px;
+        list-style-type: none;
+        font-family: @font-text;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 24px;
+        letter-spacing: 0.4px;
+
+        li{
+            border-bottom: 1px solid fade(@color-text, 20%);
+            padding-top: 12px;
+            padding-bottom: 12px;
+            overflow: hidden;
+            letter-spacing: 1px;
+
+            &::before{
+                content: '•';
+                margin-right: 5px;
+            }
+
+            a{
+                color: @color-text;
+            }
+
+            span{
+                float: right;
+                color: @color-text;
+            }
+
+            &:hover{
+                a{
+                    text-decoration: none;
+                    color: @brand-color;
+                }
+            }
+        }
+    }
+
+    
+    .widget-tags{
+
+        a{
+            display: inline-block;
+            font-size: 11px;
+            font-family: @font-text;
+            letter-spacing: 1px;
+            padding: 5px 15px;
+            text-transform: none;
+            margin-right: 5px;
+            border: 1px solid fade(@color-text, 10%);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            .transition();
+
+            &:hover{
+                background-color: @brand-color;
+                color: #fff;
+            }
+        }
+    }
+
+
+
+    .social-links{
+        display: block;
+
+        a{
+            display: inline-block;
+            background-color: #414141;
+            border-radius: 50%;
+            width: 37px;
+            height: 37px;
+            color: #fff;
+            line-height: 37px;
+            font-size: 14px;
+            margin-right: 6px;
+
+            .transition();
+
+            i{
+
+            }
+
+            &:hover{
+                background-color: darken(#414141, 10%);
+            }
+        }
+    }
+
+
+    .recent-posts{
+
+
+        .rp-item{
+            display: block;
+            overflow: hidden;
+            position: relative;
+
+            h5{
+                font-family: @font-text;
+                font-size: 13px;
+                font-weight: 400;
+                text-transform: uppercase;
+                letter-spacing: 0.4px;
+                line-height: 20px;
+                margin: 0px;
+
+                a{
+                    color: @color-text;
+                }
+            }
+
+            .rp-date{
+                font-size: 12px;
+                font-family: @font-text;
+                letter-spacing: 0.7px;
+            }
+
+            img{
+                float: right;
+                width: 69px;
+                margin-left: 15px;
+            }
+
+            &:hover{
+
+                h5 a{
+                    color: @color-title;
+                }
+                .rp-date{
+                    color: @brand-color;
+                }
+            }
+
+            & + .rp-item{
+                border-top: 1px solid fade(@color-text, 20%);
+                margin-top: 20px;
+                padding-top: 20px;
+            }
+        }
+
+    }
+
+
+
+    .images-list{
+        margin-left: -7px;
+        margin-right: -7px;
+
+        & > div{
+            padding-left: 7px;
+            padding-right: 7px;
+        }
+        a{
+            display: inline-block;
+            margin-bottom: 15px;
+
+            img{
+                width: 100%;
+            }
+        }
+    }
+
+
+}
+
+
+.search_form{
+    position: relative;
+
+    input{
+        border: 1px solid fade(@color-text, 20%);
+        font-family: @font-title;
+        font-weight: normal;
+        font-size: 12px;
+        letter-spacing: 1px;
+        color: @color-text;
+        padding: 10px 20px;
+        padding-right: 44px !important;
+        width: 100%;
+        height: 40px;
+        text-transform: none;
+
+        &:focus{
+            outline: none;
+        }
+    }
+
+    button{
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        height: 40px;
+        background-color: transparent;
+        border: 0px;
+        font-size: 16px;
+        line-height: 100%;
+        padding: 0px 15px;
+        color: @color-text;
+    }
+}

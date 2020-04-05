@@ -1,0 +1,7 @@
+{% load cms_tags %}<section class="{{ instance.style }}" style="{% if instance.padding %}padding: {{ instance.padding }};{% endif %}{% if instance.background_color %}background-color:{{ instance.background_color }}{% endif %}">
+    {% if instance.include_container %}<div class="container">{% endif %}
+    {% for plugin in instance.child_plugin_instances %}
+        {% render_plugin plugin %}
+    {% endfor %}
+    {% if instance.include_container %}</div>{% endif %}
+</section>

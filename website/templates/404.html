@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n menu_tags cms_tags %}
+{% block title %}{% trans "404 - Page not found" %}{% endblock %}
+{% block breadcrumb %}
+    <div id="top-content" class="container-fluid inner-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="page-title">Not found</div>
+                    <div class="page-subtitle">
+                        {% block feature %}{% static_placeholder "Not found header" %}{% endblock feature %}
+                    </div>
+                    <ul class="breadcrumb">
+                        {% block breadcrumb_content %}
+                            <li class="child"><a href="/">Home</a></li>{% endblock %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock breadcrumb %}
+{% block content %}
+    <div class="text-center pricing" style="margin-bottom: 50px">
+        <h1>{% trans "404 - Page not found" %}</h1>
+        <p>{% trans "We're sorry, but the requested page could not be found." %}</p>
+        {% static_placeholder "Not found text" %}
+    </div>
+{% endblock content %}

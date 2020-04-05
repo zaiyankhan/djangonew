@@ -1,0 +1,192 @@
+article.blog-item{
+	display: block;
+	position: relative;
+	width: 100%;
+	margin-bottom: 60px;
+	
+
+	.entry-media{
+		position: relative;
+		margin-bottom: 40px;
+
+		.el-link{
+
+		}
+
+		img{
+			width: 100%;
+		}
+
+		.entry-date{
+			width: 60px;
+			height: 70px;
+			background-color: @brand-color;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			text-align: center;
+			font-size: 15px;
+			font-weight: bold;
+			font-family: @font-text;
+			color: #fff;
+			text-transform: uppercase;
+			letter-spacing: 0.4px;
+			line-height: 24px;
+
+			&::before{
+				content: '';
+				width: 60px;
+				height: 70px;
+				position: absolute;
+				border: 1px solid @brand-color;
+				top: 4px;
+				left: 4px;
+			}
+
+			span{
+				display: block;
+
+				&:first-child{
+					padding-top: 11px;
+				}
+			}
+		}
+	}
+
+	h3{
+		font-family: @font-title;
+		font-weight: 600;
+		font-size: 16px;
+		letter-spacing: 0.8px;
+		line-height: 24px;
+		padding-left: 30px;
+		padding-right: 30px;
+		margin: 0px;
+		margin-bottom: 10px;
+
+		a{
+
+		}
+	}
+
+	.entry-meta{
+		padding-left: 30px;
+		padding-right: 30px;
+		margin-bottom: 20px;
+		font-size: 12px;
+		font-family: @font-title;
+		font-weight: 600;
+		letter-spacing: 0.8px;
+		color: @color-text;
+
+		a{
+			color: @color-text;
+		}
+
+		span{
+			display: inline-block;
+
+			& + span{
+
+				&::before{
+					content: '|';
+					margin-left: 15px;
+					margin-right: 18px;
+				}
+			}
+		}
+	}
+
+	.entry-excerpt{
+		padding-left: 30px;
+		padding-right: 30px;
+		font-size: 14px;
+		line-height: 22px;
+
+	}
+
+
+
+
+
+	&.blog-single{
+		border: 1px solid #e8e8e8;
+		border-top: 0px;
+		padding-bottom: 30px;
+
+		.entry-excerpt{
+			font-size: 14px;
+			line-height: 26px;
+			letter-spacing: 0.3px;
+		}
+	}
+
+
+	.author-info{
+		overflow: hidden;
+		margin-top: 60px;
+
+		.author-image{
+			display: block;
+			float: left;
+
+			img{
+				width: 120px;
+			}
+		}
+
+		.info-entry{
+			margin-left: 140px;
+
+			.info-title{
+				margin-bottom: 15px;
+
+				h5{
+					font-size: 15px;
+					font-weight: 600;
+					font-family: @font-title;
+					letter-spacing: 1px;
+					margin: 0px;
+					padding: 0px;
+					text-transform: uppercase;
+					display: inline-block;
+
+					a{
+
+					}
+				}
+
+				.info-social{
+					display: inline-block;
+					margin-left: 20px;
+
+					a{
+						font-size: 12px;
+						display: inline-block;
+						width: 21px;
+						height: 21px;
+						line-height: 21px;
+						text-align: center;
+						border: 1px solid @brand-color;
+						margin-right: 5px;
+
+						&.fb{ border-color: #3b5998; color: #3b5998;}
+						&.tw{ border-color: #4099ff; color: #4099ff;}
+						&.tm{ border-color: #35465c; color: #35465c;}
+						&.gp{ border-color: #bb0000; color: #bb0000;}
+					}
+				}
+			}
+		}
+	}
+
+
+}
+
+
+
+
+
+
+
+

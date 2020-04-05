@@ -1,0 +1,24 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load bootstrap3 %}
+{% load account socialaccount cms_tags %}
+{% block title %}Your profile {{ block.super }}{% endblock %}
+{% block head_title %}Your profile{% endblock %}
+
+{% block content %}
+    {% static_placeholder "Profile content" %}
+{% endblock %}
+{% block sidebar %}
+    {% static_placeholder "Profile sidebar" %}
+{% endblock sidebar %}
+{% block topsidebar %}
+    {% static_placeholder "Profile top sidebar" %}
+{% endblock topsidebar %}
+{% block sub_nav %}
+    {% include "account/profile_sub_nav.html" %}
+{% endblock sub_nav %}
+{% block breadcrumb_content %}
+{{ block.super }}
+    <li class="child active"><a href="{% url 'user-profile' %}">Profile</a></li>
+{% endblock %}

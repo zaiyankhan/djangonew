@@ -1,0 +1,14 @@
+{% load thumbnail %}<div class="testimonial-box">
+    <div class="testimonial-image">
+        {% if testimonial_box.image %}
+        {% thumbnail testimonial_box.image '172x172' crop upscale subject_location=testimonial_box.image.subject_location as thumb %}
+        <img src="{{ thumb.url }}" class="img-responsive center-block img-circle" alt="{{ testimonial_box.who|default_if_none:"" }}"/>
+        {% endif %}
+    </div>
+    <div class="testimonial-title">{{ testimonial_box.title }}</div>
+    <div class="testimonial-details">{{ testimonial_box.info|default_if_none:"" }}
+    </div>
+    <div class="testimonial-info">
+        <span class="name">{{ testimonial_box.who|default_if_none:"" }}</span> - {{ testimonial_box.company|default_if_none:"" }}
+    </div>
+</div>

@@ -1,0 +1,6 @@
+<ul class="nav navbar-sidenav">
+    <li><a href="{% url "user-account-details" %}">Account details</a></li>
+    <li><a href="{% url "account_change_password" %}">Change password</a></li>
+    <li><a href="{% url "orders" %}">Your orders</a></li>
+    {% include "helpdesk/navigation.html" %}
+</ul>
