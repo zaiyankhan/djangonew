@@ -28,7 +28,7 @@ cssselect==1.0.3
 cssutils==1.0.2
 defusedxml==0.5.0
 diff-match-patch==20121119
-Django==1.10.8
+Django==1.11.28
 django-absolute==0.3
 django-admin-sortable==2.0.21
 django-allauth==0.31.0
