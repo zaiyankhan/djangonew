@@ -16,7 +16,7 @@ aldryn-video==1.0.0
 appdirs==1.4.3
 asn1crypto==0.22.0
 awesome-slugify==1.6.5
-Babel==2.4.0
+Babel==2.9.1
 backport-collections==0.1
 beautifulsoup4==4.5.3
 braintree==3.37.2
