@@ -40,7 +40,7 @@ django-bootstrap3==8.2.3
 django-carton==1.2.1
 django-classy-tags==0.8.0
 django-cleanup==0.4.2
-django-cms==3.4.6
+django-cms==3.4.7
 django-colorfield==0.1.15
 django-countries==4.5
 django-durationfield==0.5.2
